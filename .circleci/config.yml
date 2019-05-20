@@ -11,6 +11,9 @@ jobs:
       - run:
           name: Installing cpplint Tool
           command: 'pip3 install cpplint'
+      - run:
+          name: Build Cmake
+          command: chmod u+x build.sh && ./build.sh
 
 #  workflows:
 #    version: 2
