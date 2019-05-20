@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run:
           name: Installing dnf Tool
-          command: 'dnf install spdlog libasan python3 ninja-build gcc cmake cppcheck gtest-devel gtest -y'
+          command: 'dnf install spdlog libasan python3 ninja-build g++ clang cmake cppcheck gtest-devel gtest -y'
       - run:
           name: Installing cpplint Tool
           command: 'pip3 install cpplint'
