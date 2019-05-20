@@ -1,14 +1,15 @@
-#define CATCH_CONFIG_MAIN // This tells Catch to provide a main() - only do this
-                          // in one cpp file
-#define CATCH_CONFIG_COLOUR_ANSI
-#include "catch2/catch.hpp"
+#include <gtest/gtest.h>
 
-unsigned int Factorial(unsigned int number) {
-  return number <= 1 ? number : Factorial(number - 1) * number;
-}
+int targetFunc(int num) { return num + 5; }
 
-TEST_CASE("Factorials are computed", "[factorial]") {
-  CHECK(Factorial(1) == 2);
-  REQUIRE(Factorial(3) == 6);
-  REQUIRE(Factorial(10) == 3628800);
-}
+class ModuleTest : public ::testing::Test {
+protected:
+  void SetUp() override { someInt = 5; }
+
+  int someInt;
+
+  // void TearDown() override {}
+};
+
+TEST_F(ModuleTest, TargetFuncTest) { EXPECT_EQ(10, targetFunc(someInt)); }
+TEST_F(ModuleTest, TargetWrongFuncTest) { EXPECT_EQ(11, targetFunc(someInt)); }
