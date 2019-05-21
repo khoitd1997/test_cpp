@@ -4,6 +4,7 @@ jobs:
     docker:
       - image: "fedora:latest"
     steps:
+      - checkout
       - run: 'dnf install ninja-build gcc-c++ clang cmake -y'
       - run: 'dnf install cppcheck python3 -y && pip3 install cpplint'
       - run: 'dnf install spdlog libasan libubsan gtest-devel gtest -y'
