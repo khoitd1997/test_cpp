@@ -6,14 +6,18 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Installing dnf Tool
-          command: 'dnf install spdlog libasan python3 ninja-build gcc-c++ clang cmake cppcheck gtest-devel gtest -y'
+          name: Installing Build Tool
+          command: 'dnf install ninja-build gcc-c++ clang cmake -y'
       - run:
-          name: Installing cpplint Tool
-          command: 'pip3 install cpplint'
+          name: Installing Linting Tool
+          command: 'dnf install cppcheck python3 -y && pip3 install cpplint'
       - run:
-          name: Build Cmake
+          name: Install Library
+          command: 'dnf install spdlog libasan libubsan gtest-devel gtest -y'
+      - run:
+          name: Build and Test
           command: chmod u+x build.sh && ./build.sh
+          requires: 
 
 #  workflows:
 #    version: 2
