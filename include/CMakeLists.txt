@@ -1,9 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(Test_cpp LANGUAGES CXX)
 
-# find_package(Catch2 REQUIRED)
-enable_testing()
-find_package(GTest REQUIRED)
+# find_package(Catch2 REQUIRED) enable_testing() find_package(GTest REQUIRED)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -43,7 +41,8 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
   option(GIT_SUBMODULE "Check submodules during build" ON)
   if(GIT_SUBMODULE)
     message(STATUS "Submodule update")
-    execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init
+    execute_process(COMMAND ${GIT_EXECUTABLE} submodule update
+                            --init
                             --recursive
                     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                     RESULT_VARIABLE GIT_SUBMOD_RESULT)
@@ -57,10 +56,9 @@ if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
 endif()
 
 add_executable(test_cpp ${PROJECT_SOURCES} main.cpp)
-target_link_libraries(test_cpp PRIVATE test_module)
+# target_link_libraries(test_cpp PRIVATE test_module)
 
-add_subdirectory(test_module)
-# add_subdirectory(test_mod_2)
+# add_subdirectory(test_module) add_subdirectory(test_mod_2)
 
 # add_executable(unit_test_cpp ${PROJECT_SOURCES} test_main.cpp)
 # target_link_libraries(unit_test_cpp # test_mod_2_test Catch2::Catch2

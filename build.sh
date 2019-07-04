@@ -7,4 +7,6 @@ mkdir -p ${currDir}/build
 
 cd ${currDir}/build
 cmake -G Ninja .. && ninja 
-GTEST_COLOR=1 ctest --verbose
+cd bin
+./test_cpp
+# GTEST_COLOR=1 ctest --verbose
