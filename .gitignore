@@ -76,8 +76,8 @@ TAGS
 *.sublime-workspace
 
 # Ninja output
-.ninja_deps
 .ninja_log
+.ninja_deps
 
 # Visual Studio Code project files
 /.vscode/ipch
