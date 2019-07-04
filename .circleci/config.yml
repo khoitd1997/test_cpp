@@ -1,27 +1,33 @@
 version: 2
 jobs:
-  build:
+  install_deps_and_build:
     docker:
       - image: "fedora:latest"
     steps:
       - checkout
-      - run:
-          name: Installing Build Tool
-          command: 'dnf install ninja-build gcc-c++ clang cmake -y'
-      - run:
-          name: Installing Linting Tool
-          command: 'dnf install cppcheck python3 -y && pip3 install cpplint'
-      - run:
-          name: Install Library
-          command: 'dnf install spdlog libasan libubsan gtest-devel gtest -y'
-      - run:
-          name: Build and Test
-          command: chmod u+x build.sh && ./build.sh
-          requires: 
+      - run: dnf install ninja-build gcc-c++ clang cmake -y
+      - run: dnf install cppcheck python3 -y && pip3 install cpplint
+      - run: dnf install spdlog libasan libubsan gtest-devel gtest -y
+      - run: chmod u+x build.sh && ./build.sh
+      - persist_to_workspace:
+          root: build
+          paths:
+            - .
 
-#  workflows:
-#    version: 2
-#    one_and_two:
-#      jobs:
-#        - one
-#        - two
+  test:
+    docker:
+      - image: "fedora:latest"
+    steps:
+      - checkout
+      - attach_workspace:
+          at: build
+      - run: chmod u+x test.sh && ./test.sh 
+
+workflows:
+  version: 2
+  hatter_build:
+    jobs:
+      - install_deps_and_build
+      - test:
+          requires:
+            - install_deps_and_build
