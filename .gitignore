@@ -67,7 +67,6 @@ TAGS
 /gtest-1.6.0
 *.patch
 
-# Eclipse project files
 .project
 .cproject
 
