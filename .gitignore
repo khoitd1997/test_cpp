@@ -82,3 +82,5 @@ TAGS
 # Visual Studio Code project files
 /.vscode/ipch
 /.ccls-cache/
+
+.vscode/*
